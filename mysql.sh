@@ -42,11 +42,13 @@ if [ $? -ne 0 ]
     dnf install mysql-server -y &>>$LOG_FILE
     if [ $? -ne 0 ]
     then
-        echo "mysql installation is $R not success $N ...check it" | tee -a $LOG_FILE
+        echo -e "mysql installation is $R not success $N ...check it" | tee -a $LOG_FILE
         exit 1
     else
-        echo "mysql installation is $G success $N" | tee -a $LOG_FILE
+        echo -e "mysql installation is $G success $N" | tee -a $LOG_FILE
     fi
+ else
+    echo -e "mysql is already $Y installed, nothing to do..$N"
 fi
 
 systemctl is-enabled mysqld &>>$LOG_FILE
@@ -56,11 +58,13 @@ if [ $? -ne 0 ]
     systemctl enable mysqld &>>$LOG_FILE
     if [ $? -ne 0 ]
     then
-        echo "mysql enable is $R not success$N...check it" | tee -a $LOG_FILE
+        echo -e "mysql enable is $R not success$N...check it" | tee -a $LOG_FILE
         exit 1
     else
-        echo "mysql enabled $G successfully$N" | tee -a $LOG_FILE
+        echo -e "mysql enabled $G successfully$N" | tee -a $LOG_FILE
     fi
+ else
+    echo -e "mysql service is $G enabled already nothing to do.. $N" | tee -a $LOG_FILE
 fi
 
 systemctl status mysqld &>>$LOG_FILE
@@ -70,11 +74,13 @@ if [ $? -ne 0 ]
     systemctl start mysqld &>>$LOG_FILE
     if [ $? -ne 0 ]
     then
-        echo "mysql service is $R not success...check it $N" | tee -a $LOG_FILE
+        echo -e "mysql service is $R not success...check it $N" | tee -a $LOG_FILE
         exit 1
     else
-        echo "mysql service started $G successfully $N" | tee -a $LOG_FILE
+        echo -e "mysql service started $G successfully $N" | tee -a $LOG_FILE
     fi
+ else
+    echo -e "mysql service is $G running already nothing to do..$N" | tee -a $LOG_FILE
 fi
 
 sudo mysql -h 172.31.33.134 -u root -pExpenseApp@1 -e "show databases;" &>>$LOG_FILE
