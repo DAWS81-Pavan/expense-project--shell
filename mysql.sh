@@ -74,7 +74,7 @@ if [ $? -ne 0 ]
  then
     echo "mysql service is not running , going to start the service.." | tee -a $LOG_FILE
     systemctl start mysqld &>>$LOG_FILE
-    VALIDATE$? "mysql service"
+    VALIDATE$? "enable mysql"
     # if [ $? -ne 0 ]
     # then
     #     echo -e "mysql service is $R not success...check it $N" | tee -a $LOG_FILE
@@ -86,7 +86,7 @@ if [ $? -ne 0 ]
     echo -e "mysql service is $G running already nothing to do..$N" | tee -a $LOG_FILE
 fi
 
-sudo mysql -h 172.31.33.134 -u root -pExpenseApp@1 -e "show databases;" &>>$LOG_FILE
+sudo mysql -h mysql.dev.pdevops.online -u root -pExpenseApp@1 -e "show databases;" &>>$LOG_FILE
 if [ $? -ne 0 ]
 then 
     echo "mysql root password is not setup, setting up now" | tee -a $LOG_FILE
