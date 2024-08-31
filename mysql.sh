@@ -40,7 +40,7 @@ if [ $? -ne 0 ]
  then
     echo "mysql is not installed, going to install it.." | tee -a $LOG_FILE
     dnf install mysql-server -y &>>$LOG_FILE
-    VALIDATE$? "install mysql-server"
+    VALIDATE $? "install mysql-server"
     # if [ $? -ne 0 ]
     # then
     #     echo -e "mysql installation is $R not success $N ...check it" | tee -a $LOG_FILE
@@ -57,7 +57,7 @@ if [ $? -ne 0 ]
  then
     echo "mysql is disabled , going to enable it.." | tee -a $LOG_FILE
     systemctl enable mysqld &>>$LOG_FILE
-    VALIDATE$? "enable mysql"
+    VALIDATE $? "enable mysql"
     # if [ $? -ne 0 ]
     # then
     #     echo -e "mysql enable is $R not success$N...check it" | tee -a $LOG_FILE
@@ -74,7 +74,7 @@ if [ $? -ne 0 ]
  then
     echo "mysql service is not running , going to start the service.." | tee -a $LOG_FILE
     systemctl start mysqld &>>$LOG_FILE
-    VALIDATE$? "enable mysql"
+    VALIDATE $? "enable mysql"
     # if [ $? -ne 0 ]
     # then
     #     echo -e "mysql service is $R not success...check it $N" | tee -a $LOG_FILE
