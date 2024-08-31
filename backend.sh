@@ -36,13 +36,13 @@ echo "Script started executing at: $(date)" | tee -a $LOG_FILE
 CHECK_ROOT
 
 dnf module disable nodejs -y &>>$LOG_FILE
-VALIDATE$? "Disable default nodejs"
+VALIDATE $? "Disable default nodejs"
 
 dnf module enable nodejs:20 -y &>>$LOG_FILE
-VALIDATE$? "enable nodejs:20" 
+VALIDATE $? "enable nodejs:20" 
 
 dnf install nodejs -y &>>$LOG_FILE
-VALIDATE$? "install nodejs" 
+VALIDATE $? "install nodejs" 
 
 id expense &>>$LOG_FILE
 if [ $? -ne 0 ]
@@ -55,7 +55,7 @@ else
 fi
 
 mkdir -p /app &>>$LOG_FILE
-VALIDATE$? "Creating /app folder"
+VALIDATE $? "Creating /app folder"
 
 curl -o /tmp/backend.zip https://expense-builds.s3.us-east-1.amazonaws.com/expense-backend-v2.zip &>>$LOG_FILE
 VALIDATE $? "Downloading backend application code"
